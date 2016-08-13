@@ -1,105 +1,81 @@
 source ~/.vimrc.bundle
 
 
+" Global Settings {{{
 
-" Clipboard
-set clipboard=unnamed,unnamedplus
+	" Clipboard
+	set clipboard=unnamed,unnamedplus
 
-" Line Number
-set relativenumber
+	" Line Number
+	set relativenumber
 
-" Hightlight Search
-set hlsearch
-set incsearch
+	" Hightlight Search
+	set hlsearch
+	set incsearch
 
-" Syntax Highlight
-syntax on
+	" Syntax Highlight
+	syntax on
 
-" Set indent
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
+	" Set indent
+	set tabstop=2
+	set shiftwidth=2
+	set softtabstop=2
+	set expandtab
 
-" Write to file directly when ':w', not to create a new file and remove the old
-" one. Otherwise it will cause file watcher problem.
-set backupcopy=yes
+	" Write to file directly when ':w', not to create a new file and remove the old
+	" one. Otherwise it will cause file watcher problem.
+	set backupcopy=yes
 
-" Colorful
-set background=light
-colorscheme solarized
+	" Colorful
+	set background=light
+	colorscheme solarized
 
-" Shell
-" set shell=fish
+	" Shell
+	" set shell=fish
 
-" Key Bindings
-" =============================================================================
+" }}}
 
-" Leader
-let mapleader = ","
-noremap \ ,
 
-" edit .vimrc.local quickly
-nnoremap <leader>ev :vsplit ~/.vimrc<cr>
+" Key Bindings {{{
 
-" load .vimrc quickly
-nnoremap <Leader>sv :source $MYVIMRC<cr>
+  " Leader
+  let mapleader = ","
+  noremap \ ,
 
-" Exit insert mode quickly
-inoremap jk <esc>
+  " edit .vimrc.local quickly
+  nnoremap <leader>ev :vsplit ~/.vimrc<cr>
 
-" Mute Highlighting
-noremap <slient> <C-l> :<C-u>nohlsearch<CR><C-l>
+  " load .vimrc quickly
+  nnoremap <Leader>sv :source $MYVIMRC<cr>
 
-" Strip whitespace
-autocmd FileType javascript autocmd BufWritePre <buffer> call StripTrailingWhitespace()
-" autocmd BufWritePre * call StripTrailingWhitespace()
+  " Mute Highlighting
+  noremap <slient> <C-l> :<C-u>nohlsearch<CR><C-l>
 
-" Strip whitespace {
-function! StripTrailingWhitespace()
-  " Preparation: save last search, and cursor position.
-  let _s=@/
-  let l = line(".")
-  let c = col(".")
-  " do the business:
-  %s/\s\+$//e
-  " clean up: restore previous search history, and cursor position
-  let @/=_s
-  call cursor(l, c)
-endfunction
-" }
+  " Move line
+  nnoremap - ddp
+  nnoremap _ ddkP
 
+  " Select word
+  nnoremap <space> viw
+  vnoremap <space> <esc>
+
+  " Exit insert mode quickly
+  inoremap jk <esc>
+
+  " Uppercase
+  inoremap <C-u> <esc>viwUea
+
+  " Terminal
+  tnoremap <Esc> <C-\><C-n>
+
+
+" }}}
+
+
+" Plugin Configuration {{{
 
 " vim-go
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>c <Plug>(go-coverage)
-
-au FileType go nmap <Leader>ds <Plug>(go-def-split)
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-au FileType go nmap <Leader>dt <Plug>(go-def-tab)
-
-au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-
-au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
-
-au FileType go nmap <Leader>s <Plug>(go-implements)
-
-au FileType go nmap <Leader>i <Plug>(go-info)
-
-au FileType go nmap <Leader>e <Plug>(go-rename)
-
 let g:go_fmt_command = "goimports"
-
-
-" Terminal
-:tnoremap <Esc> <C-\><C-n>
-
-
-" Plugin Configuration
-" =============================================================================
 
 " eslint
 let g:syntastic_javascript_checkers=['eslint']
@@ -137,65 +113,64 @@ nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 " " deoplete
 " let g:deoplete#enable_at_startup = 1
 
-" " neocomplete
-" " Disable AutoComplPop.
-" let g:acp_enableAtStartup = 0
-" " Use neocomplete.
-" let g:neocomplete#enable_at_startup = 1
-" " Use smartcase.
-" let g:neocomplete#enable_smart_case = 1
-" " Set minimum syntax keyword length.
-" let g:neocomplete#sources#syntax#min_keyword_length = 3
-" let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-" " Define dictionary.
-" let g:neocomplete#sources#dictionary#dictionaries = {
-    " \ 'default' : '',
-    " \ 'vimshell' : $HOME.'/.vimshell_hist',
-    " \ 'scheme' : $HOME.'/.gosh_completions'
-        " \ }
-
-" " Define keyword.
-" if !exists('g:neocomplete#keyword_patterns')
-    " let g:neocomplete#keyword_patterns = {}
-" endif
-" let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" " Plugin key-mappings.
-" inoremap <expr><C-g>     neocomplete#undo_completion()
-" inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" " Recommended key-mappings.
-" " <CR>: close popup and save indent.
-" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-" function! s:my_cr_function()
-  " return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " " For no inserting <CR> key.
-  " "return pumvisible() ? "\<C-y>" : "\<CR>"
-" endfunction
-" " <TAB>: completion.
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" " <C-h>, <BS>: close popup and delete backword char.
-" inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-" inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" " Close popup by <Space>.
-" "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-" " AutoComplPop like behavior.
-" "let g:neocomplete#enable_auto_select = 1
-
-" " Shell like behavior(not recommended).
-" "set completeopt+=longest
-" "let g:neocomplete#enable_auto_select = 1
-" "let g:neocomplete#disable_auto_complete = 1
-" "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-" " Enable omni completion.
-" autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-" autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-" autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
 " Markdown
 let g:markdown_fenced_languages = ['javascript', 'js=javascript', 'json=javascript', 'go']
+
+" }}}
+
+
+" File settings {{{
+
+augroup filetype_vim
+  autocmd!
+  autocmd FileType vim setlocal foldmethod=marker
+augroup END
+
+augroup filetype_go
+  autocmd!
+  " vim-go
+  autocmd FileType go nmap <buffer> <leader>r <Plug>(go-run)
+  autocmd FileType go nmap <buffer> <leader>b <Plug>(go-build)
+  autocmd FileType go nmap <buffer> <leader>t <Plug>(go-test)
+  autocmd FileType go nmap <buffer> <leader>c <Plug>(go-coverage)
+
+  autocmd FileType go nmap <buffer> <Leader>ds <Plug>(go-def-split)
+  autocmd FileType go nmap <buffer> <Leader>dv <Plug>(go-def-vertical)
+  autocmd FileType go nmap <buffer> <Leader>dt <Plug>(go-def-tab)
+
+  autocmd FileType go nmap <buffer> <Leader>gd <Plug>(go-doc)
+  autocmd FileType go nmap <buffer> <Leader>gv <Plug>(go-doc-vertical)
+
+  autocmd FileType go nmap <buffer> <Leader>gb <Plug>(go-doc-browser)
+
+  autocmd FileType go nmap <buffer> <Leader>s <Plug>(go-implements)
+
+  autocmd FileType go nmap <buffer> <Leader>i <Plug>(go-info)
+
+  autocmd FileType go nmap <buffer> <Leader>e <Plug>(go-rename)
+augroup END
+
+augroup filetype_javascript
+  autocmd!
+  " Strip whitespace
+  autocmd FileType javascript autocmd BufWritePre <buffer> call StripTrailingWhitespace()
+augroup END
+
+" autocmd BufWritePre * call StripTrailingWhitespace()
+
+" }}}
+
+
+" Functions {{{
+function! StripTrailingWhitespace()
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " do the business:
+  %s/\s\+$//e
+  " clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+" }}}
