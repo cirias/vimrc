@@ -1,7 +1,7 @@
 source ~/.vimrc.bundle
 
 
-" Global Settings {{{
+" Global Settings {{{;
 
 	" Clipboard
 	set clipboard=unnamed,unnamedplus
@@ -27,7 +27,7 @@ source ~/.vimrc.bundle
 	set backupcopy=yes
 
 	" Colorful
-	set background=light
+	set background=dark
 	colorscheme solarized
 
 	" Shell
@@ -66,20 +66,28 @@ source ~/.vimrc.bundle
   inoremap <C-u> <esc>viwUea
 
   " Terminal
-  tnoremap <Esc> <C-\><C-n>
+  if exists(':tnoremap')
+    tnoremap jk <C-\><C-n>
+  endif
 
+  " Substitute the word under the cursor
+  nnoremap <Leader>* :%s/\<<C-r><C-w>\>/
 
 " }}}
 
 
-" Plugin Configuration {{{
+" Plugin Configuration {{{;
 
 " vim-go
 let g:go_fmt_command = "goimports"
+let g:syntastic_go_checkers = ['go']
+" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " eslint
 let g:syntastic_javascript_checkers=['eslint']
 
+" swift
+let g:syntastic_swift_checkers = ['swiftpm', 'swiftlint']
 
 " haskellmode
 let g:haddock_browser="/usr/bin/google-chrome-stable"
