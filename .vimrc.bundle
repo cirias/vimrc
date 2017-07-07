@@ -28,11 +28,14 @@ Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'kana/vim-textobj-user'
 Plugin 'kana/vim-textobj-indent'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'rking/ag.vim'
 Plugin 'keith/swift.vim'
+Plugin 'flowtype/vim-flow'
+
+" autocomplete
+Plugin 'Shougo/deoplete.nvim'
 " Plugin 'Shougo/neocomplete.vim'
-" Plugin 'Shougo/deoplete.nvim'
+" Plugin 'Valloric/YouCompleteMe'
 
 " JavaScript
 Plugin 'pangloss/vim-javascript'
@@ -49,6 +52,9 @@ Plugin 'elixir-lang/vim-elixir'
 
 " Elm
 Plugin 'lambdatoast/elm.vim'
+
+" C
+Plugin 'rhysd/vim-clang-format'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

@@ -78,51 +78,49 @@ source ~/.vimrc.bundle
 
 " Plugin Configuration {{{;
 
-" vim-go
-let g:go_fmt_command = "goimports"
-let g:syntastic_go_checkers = ['go']
-" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+" syntastic
+let g:syntastic_cpp_checkers = ['cppcheck', 'cpplint']
+let g:syntastic_cpp_cpplint_exec = 'cpplint'
+let g:syntastic_cpp_cppcheck_args = ['--language=c++']
 
-" eslint
+let g:syntastic_go_checkers = ['go']
+
 let g:syntastic_javascript_checkers=['eslint']
 
-" swift
 let g:syntastic_swift_checkers = ['swiftpm', 'swiftlint']
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+
+" vim-go
+let g:go_fmt_command = "goimports"
 
 " haskellmode
 let g:haddock_browser="/usr/bin/google-chrome-stable"
 
-
 " nerdcommenter
 let NERDSpaceDelims=1
 
-
 " ctrlp
-if executable('ack')
-  let s:ctrlp_fallback = 'ack %s --nocolor -f'
-else
-  let s:ctrlp_fallback = 'find %s -type f'
-endif
-
 let g:ctrlp_user_command = {
   \ 'types': {
     \ 1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
     \ 2: ['.hg', 'hg --cwd %s locate -I .'],
   \ },
-  \ 'fallback': s:ctrlp_fallback
+  \ 'fallback': 'find %s -type f'
 \ }
-
 
 " ctrlp-funky
 nnoremap <Leader>fu :CtrlPFunky<Cr>
 " narrow the list down with a word under cursor
 nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
-" " deoplete
-" let g:deoplete#enable_at_startup = 1
-
 " Markdown
 let g:markdown_fenced_languages = ['javascript', 'js=javascript', 'json=javascript', 'go']
+
+" vim-clang-format
+autocmd FileType c ClangFormatAutoEnable
+autocmd FileType cpp ClangFormatAutoEnable
 
 " }}}
 
@@ -156,6 +154,8 @@ augroup filetype_go
   autocmd FileType go nmap <buffer> <Leader>i <Plug>(go-info)
 
   autocmd FileType go nmap <buffer> <Leader>e <Plug>(go-rename)
+
+  " autocmd FileType go autocmd BufWritePost * :GoErrCheck
 augroup END
 
 augroup filetype_javascript
