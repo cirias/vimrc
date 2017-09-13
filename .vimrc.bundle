@@ -11,6 +11,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+Plugin 'godlygeek/tabular'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
@@ -31,6 +32,7 @@ Plugin 'kana/vim-textobj-indent'
 Plugin 'rking/ag.vim'
 Plugin 'keith/swift.vim'
 Plugin 'flowtype/vim-flow'
+Plugin 'prettier/vim-prettier'
 
 " autocomplete
 Plugin 'Shougo/deoplete.nvim'
@@ -43,6 +45,7 @@ Plugin 'mxw/vim-jsx'
 
 " Golang
 Plugin 'fatih/vim-go'
+" Plugin 'zchee/deoplete-go'
 
 " Markdown
 Plugin 'tpope/vim-markdown'
@@ -51,10 +54,18 @@ Plugin 'tpope/vim-markdown'
 Plugin 'elixir-lang/vim-elixir'
 
 " Elm
-Plugin 'lambdatoast/elm.vim'
+" Plugin 'lambdatoast/elm.vim' " seams not maintain any more
+Plugin 'ElmCast/elm-vim'
 
 " C
 Plugin 'rhysd/vim-clang-format'
+
+" Typescript
+Plugin 'leafgarland/typescript-vim' " syntax highlight
+Plugin 'mhartington/nvim-typescript' " IDE?
+
+" Pgsql
+Plugin 'lifepillar/pgsql.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

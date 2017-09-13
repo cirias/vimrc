@@ -78,6 +78,9 @@ source ~/.vimrc.bundle
 
 " Plugin Configuration {{{;
 
+" Tabular
+" let g:tabular_loaded = 1
+
 " syntastic
 let g:syntastic_cpp_checkers = ['cppcheck', 'cpplint']
 let g:syntastic_cpp_cpplint_exec = 'cpplint'
@@ -121,6 +124,20 @@ let g:markdown_fenced_languages = ['javascript', 'js=javascript', 'json=javascri
 " vim-clang-format
 autocmd FileType c ClangFormatAutoEnable
 autocmd FileType cpp ClangFormatAutoEnable
+
+" vim-flow
+let g:flow#enable = 0
+
+" deoplete-go
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+
+" vim-prettier
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.ts Prettier
+
+let g:prettier#config#print_width = 110
+let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#trailing_comma = 'es5'
 
 " }}}
 
