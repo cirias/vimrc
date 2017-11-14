@@ -27,7 +27,7 @@ source ~/.vimrc.bundle
 	set backupcopy=yes
 
 	" Colorful
-	set background=dark
+	set background=light
 	colorscheme solarized
 
 	" Shell
@@ -173,6 +173,23 @@ augroup filetype_go
   autocmd FileType go nmap <buffer> <Leader>e <Plug>(go-rename)
 
   " autocmd FileType go autocmd BufWritePost * :GoErrCheck
+augroup END
+
+augroup filetype_ts
+  autocmd!
+
+  " HerringtonDarkholme/yats.vim
+  " mhartington/nvim-typescript 
+  autocmd FileType typescript nmap <buffer> <leader>r :TSRefs<cr>
+  autocmd FileType typescript nmap <buffer> <leader>t :TSType<cr>
+  autocmd FileType typescript nmap <buffer> <leader>td :TSTypeDef<cr>
+
+  autocmd FileType typescript nmap <buffer> <Leader>ds :TSDefPreview<cr>
+
+  autocmd FileType typescript nmap <buffer> <Leader>e :TSRename<cr>
+
+  autocmd FileType typescript nmap <buffer> <Leader>ec :TSEditConfig<cr>
+
 augroup END
 
 augroup filetype_javascript

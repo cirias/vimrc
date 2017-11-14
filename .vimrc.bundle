@@ -61,7 +61,7 @@ Plugin 'ElmCast/elm-vim'
 Plugin 'rhysd/vim-clang-format'
 
 " Typescript
-Plugin 'leafgarland/typescript-vim' " syntax highlight
+Plugin 'HerringtonDarkholme/yats.vim' " syntax highlight
 Plugin 'mhartington/nvim-typescript' " IDE?
 
 " Pgsql
