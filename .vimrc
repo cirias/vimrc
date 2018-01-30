@@ -133,7 +133,7 @@ let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
 
 " vim-prettier
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.ts Prettier
+autocmd BufWritePre *.json,*.js,*.jsx,*.ts,*.tsx Prettier
 
 let g:prettier#config#print_width = 110
 let g:prettier#config#bracket_spacing = 'true'
@@ -174,6 +174,8 @@ augroup filetype_go
 
   " autocmd FileType go autocmd BufWritePost * :GoErrCheck
 augroup END
+
+autocmd BufNewFile,BufRead *.tsx setlocal filetype=typescript
 
 augroup filetype_ts
   autocmd!
