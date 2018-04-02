@@ -1,4 +1,4 @@
-source ~/.vimrc.bundle
+source ~/github.com/cirias/vimrc/.vimrc.bundle
 
 
 " Global Settings {{{;
@@ -43,7 +43,7 @@ source ~/.vimrc.bundle
   noremap \ ,
 
   " edit .vimrc.local quickly
-  nnoremap <leader>ev :vsplit ~/.vimrc<cr>
+  nnoremap <leader>ev :vsplit ~/github.com/cirias/vimrc/.vimrc<cr>
 
   " load .vimrc quickly
   nnoremap <Leader>sv :source $MYVIMRC<cr>
