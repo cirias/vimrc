@@ -1,0 +1,69 @@
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.local/share/nvim/plugged')
+
+"  Make sure you use single quotes
+
+Plug 'godlygeek/tabular'
+Plug 'jiangmiao/auto-pairs'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/syntastic'
+Plug 'mtscout6/syntastic-local-eslint.vim'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-abolish'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'altercation/vim-colors-solarized'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tacahiroy/ctrlp-funky'
+Plug 'easymotion/vim-easymotion'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-indent'
+" Plug 'rking/ag.vim'
+Plug 'keith/swift.vim'
+Plug 'flowtype/vim-flow'
+Plug 'prettier/vim-prettier'
+
+" autocomplete
+Plug 'Shougo/deoplete.nvim'
+" Plug 'Shougo/neocomplete.vim'
+" Plug 'Valloric/YouCompleteMe'
+
+" JavaScript
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+
+" Golang
+Plug 'fatih/vim-go'
+" Plug 'zchee/deoplete-go'
+
+" Markdown
+Plug 'tpope/vim-markdown'
+
+" Elixir
+Plug 'elixir-lang/vim-elixir'
+
+" Elm
+" Plug 'lambdatoast/elm.vim' " seams not maintain any more
+Plug 'ElmCast/elm-vim'
+
+" C
+Plug 'rhysd/vim-clang-format'
+
+" Typescript
+Plug 'HerringtonDarkholme/yats.vim' " syntax highlight
+Plug 'mhartington/nvim-typescript', { 'do': './install.sh' } " IDE?
+
+" Pgsql
+Plug 'lifepillar/pgsql.vim'
+
+" Fuzzy Finder
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+" Initialize plugin system
+call plug#end()

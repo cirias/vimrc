@@ -33,6 +33,7 @@ Plugin 'rking/ag.vim'
 Plugin 'keith/swift.vim'
 Plugin 'flowtype/vim-flow'
 Plugin 'prettier/vim-prettier'
+Plugin 'file:///~/.fzf', {'name': 'fzf'}
 
 " autocomplete
 Plugin 'Shougo/deoplete.nvim'

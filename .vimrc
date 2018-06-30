@@ -1,4 +1,4 @@
-source ~/github.com/cirias/vimrc/.vimrc.bundle
+source ~/github.com/cirias/vimrc/.vimrc.plug
 
 
 " Global Settings {{{;
@@ -6,8 +6,10 @@ source ~/github.com/cirias/vimrc/.vimrc.bundle
 	" Clipboard
 	set clipboard=unnamed,unnamedplus
 
-	" Line Number
-	set relativenumber
+	" Hybrid Line Number
+	set number relativenumber
+
+  set cursorline
 
 	" Hightlight Search
 	set hlsearch
@@ -78,6 +80,14 @@ source ~/github.com/cirias/vimrc/.vimrc.bundle
 
 " Plugin Configuration {{{;
 
+" fzf
+" Command for git grep
+" - fzf#vim#grep(command, with_column, [options], [fullscreen])
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
+
 " Tabular
 " let g:tabular_loaded = 1
 
@@ -93,7 +103,7 @@ let g:syntastic_javascript_checkers=['eslint']
 let g:syntastic_swift_checkers = ['swiftpm', 'swiftlint']
 
 " deoplete
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 
 " vim-go
 let g:go_fmt_command = "goimports"
@@ -185,6 +195,7 @@ augroup filetype_ts
   autocmd FileType typescript nmap <buffer> <leader>r :TSRefs<cr>
   autocmd FileType typescript nmap <buffer> <leader>t :TSType<cr>
   autocmd FileType typescript nmap <buffer> <leader>td :TSTypeDef<cr>
+  autocmd FileType typescript nmap <buffer> <C-]> :TSDef<cr>
 
   autocmd FileType typescript nmap <buffer> <Leader>ds :TSDefPreview<cr>
 
