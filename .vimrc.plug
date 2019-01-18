@@ -38,7 +38,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 
 " Golang
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'tag': 'v1.19', 'do': ':GoUpdateBinaries' }
 " Plug 'zchee/deoplete-go'
 
 " Markdown
@@ -53,6 +53,7 @@ Plug 'ElmCast/elm-vim'
 
 " C
 Plug 'rhysd/vim-clang-format'
+Plug 'Rip-Rip/clang_complete'
 
 " Typescript
 Plug 'HerringtonDarkholme/yats.vim' " syntax highlight

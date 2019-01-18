@@ -96,17 +96,18 @@ let g:syntastic_cpp_checkers = ['cppcheck', 'cpplint']
 let g:syntastic_cpp_cpplint_exec = 'cpplint'
 let g:syntastic_cpp_cppcheck_args = ['--language=c++']
 
-let g:syntastic_go_checkers = ['go']
+let g:syntastic_go_checkers = ['golint']
 
 let g:syntastic_javascript_checkers=['eslint']
 
 let g:syntastic_swift_checkers = ['swiftpm', 'swiftlint']
 
 " deoplete
-" let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
 
 " vim-go
 let g:go_fmt_command = "goimports"
+let g:go_def_mode = "godef"
 
 " haskellmode
 let g:haddock_browser="/usr/bin/google-chrome-stable"
