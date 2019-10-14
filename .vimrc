@@ -29,8 +29,9 @@ source ~/github.com/cirias/vimrc/.vimrc.plug
 	set backupcopy=yes
 
 	" Colorful
-	set background=light
 	colorscheme solarized
+  let g:solarized_termcolors=256
+	set background=dark
 
 	" Shell
 	" set shell=fish
@@ -57,6 +58,9 @@ source ~/github.com/cirias/vimrc/.vimrc.plug
   nnoremap - ddp
   nnoremap _ ddkP
 
+  " git grep
+  nnoremap <Leader>g :Ggrep<Space>
+
   " Select word
   nnoremap <space> viw
   vnoremap <space> <esc>
@@ -70,6 +74,7 @@ source ~/github.com/cirias/vimrc/.vimrc.plug
   " Terminal
   if exists(':tnoremap')
     tnoremap jk <C-\><C-n>
+    tnoremap <C-[> <C-\><C-n>
   endif
 
   " Substitute the word under the cursor
@@ -98,16 +103,32 @@ let g:syntastic_cpp_cppcheck_args = ['--language=c++']
 
 let g:syntastic_go_checkers = ['golint']
 
-let g:syntastic_javascript_checkers=['eslint']
+" let g:syntastic_javascript_checkers=['eslint']
 
-let g:syntastic_swift_checkers = ['swiftpm', 'swiftlint']
+" let g:syntastic_swift_checkers = ['swiftpm', 'swiftlint']
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('sources', {
+\ 'typescript': ['ale'],
+\})
 
 " vim-go
 let g:go_fmt_command = "goimports"
-let g:go_def_mode = "godef"
+" let g:go_def_mode = "godef"
+let g:go_def_mode = "gopls"
+" let g:go_updatetime = 800
+" let g:go_auto_type_info = 1
+" let g:go_metalinter_autosave = 1
+
+" ale
+" let g:ale_completion_enabled = 1
+let g:ale_completion_tsserver_autoimport = 1
+" ale does not support typescript-eslint so far
+let g:ale_linters = {
+\   'typescript': ['tsserver', 'eslint'],
+\   'go': [],
+\}
 
 " haskellmode
 let g:haddock_browser="/usr/bin/google-chrome-stable"
@@ -130,21 +151,21 @@ nnoremap <Leader>fu :CtrlPFunky<Cr>
 nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
 " Markdown
-let g:markdown_fenced_languages = ['javascript', 'js=javascript', 'json=javascript', 'go']
+let g:markdown_fenced_languages = ['javascript', 'js=javascript', 'json=javascript', 'typescript', 'go']
 
-" vim-clang-format
-autocmd FileType c ClangFormatAutoEnable
-autocmd FileType cpp ClangFormatAutoEnable
 
 " vim-flow
 let g:flow#enable = 0
 
 " deoplete-go
-let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+" let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
 
 " vim-prettier
 let g:prettier#autoformat = 0
-autocmd BufWritePre *.json,*.js,*.jsx,*.ts,*.tsx Prettier
+augroup for_prettier
+  autocmd!
+  autocmd BufWritePre *.json,*.js,*.jsx,*.ts,*.tsx Prettier
+augroup END
 
 let g:prettier#config#print_width = 110
 let g:prettier#config#bracket_spacing = 'true'
@@ -155,6 +176,13 @@ let g:prettier#config#trailing_comma = 'es5'
 
 " File settings {{{
 
+augroup filetype_cpp
+  autocmd!
+  " vim-clang-format
+  autocmd FileType c ClangFormatAutoEnable
+  autocmd FileType cpp ClangFormatAutoEnable
+augroup END
+
 augroup filetype_vim
   autocmd!
   autocmd FileType vim setlocal foldmethod=marker
@@ -163,46 +191,48 @@ augroup END
 augroup filetype_go
   autocmd!
   " vim-go
-  autocmd FileType go nmap <buffer> <leader>r <Plug>(go-run)
-  autocmd FileType go nmap <buffer> <leader>b <Plug>(go-build)
-  autocmd FileType go nmap <buffer> <leader>t <Plug>(go-test)
-  autocmd FileType go nmap <buffer> <leader>c <Plug>(go-coverage)
+  autocmd FileType go nmap <buffer> gh <Plug>(go-info)
+  " autocmd FileType go nmap <buffer> <leader>r <Plug>(go-run)
+  " autocmd FileType go nmap <buffer> <leader>b <Plug>(go-build)
+  " autocmd FileType go nmap <buffer> <leader>t <Plug>(go-test)
+  " autocmd FileType go nmap <buffer> <leader>c <Plug>(go-coverage)
 
-  autocmd FileType go nmap <buffer> <Leader>ds <Plug>(go-def-split)
-  autocmd FileType go nmap <buffer> <Leader>dv <Plug>(go-def-vertical)
-  autocmd FileType go nmap <buffer> <Leader>dt <Plug>(go-def-tab)
+  " autocmd FileType go nmap <buffer> <Leader>ds <Plug>(go-def-split)
+  " autocmd FileType go nmap <buffer> <Leader>dv <Plug>(go-def-vertical)
+  " autocmd FileType go nmap <buffer> <Leader>dt <Plug>(go-def-tab)
 
-  autocmd FileType go nmap <buffer> <Leader>gd <Plug>(go-doc)
-  autocmd FileType go nmap <buffer> <Leader>gv <Plug>(go-doc-vertical)
+  " autocmd FileType go nmap <buffer> <Leader>gd <Plug>(go-doc)
+  " autocmd FileType go nmap <buffer> <Leader>gv <Plug>(go-doc-vertical)
 
-  autocmd FileType go nmap <buffer> <Leader>gb <Plug>(go-doc-browser)
+  " autocmd FileType go nmap <buffer> <Leader>gb <Plug>(go-doc-browser)
 
-  autocmd FileType go nmap <buffer> <Leader>s <Plug>(go-implements)
+  " autocmd FileType go nmap <buffer> <Leader>s <Plug>(go-implements)
 
-  autocmd FileType go nmap <buffer> <Leader>i <Plug>(go-info)
+  " autocmd FileType go nmap <buffer> <Leader>i <Plug>(go-info)
 
-  autocmd FileType go nmap <buffer> <Leader>e <Plug>(go-rename)
+  " autocmd FileType go nmap <buffer> <Leader>e <Plug>(go-rename)
 
   " autocmd FileType go autocmd BufWritePost * :GoErrCheck
 augroup END
 
 autocmd BufNewFile,BufRead *.tsx setlocal filetype=typescript
 
-augroup filetype_ts
+augroup filetype_typescript
   autocmd!
 
   " HerringtonDarkholme/yats.vim
   " mhartington/nvim-typescript 
-  autocmd FileType typescript nmap <buffer> <leader>r :TSRefs<cr>
-  autocmd FileType typescript nmap <buffer> <leader>t :TSType<cr>
-  autocmd FileType typescript nmap <buffer> <leader>td :TSTypeDef<cr>
-  autocmd FileType typescript nmap <buffer> <C-]> :TSDef<cr>
+  " autocmd FileType typescript nmap <buffer> <leader>r :TSRefs<cr>
+  " autocmd FileType typescript nmap <buffer> <leader>t :TSType<cr>
+  " autocmd FileType typescript nmap <buffer> <leader>td :TSTypeDef<cr>
+  autocmd FileType typescript nmap <buffer> <C-]> <Plug>(ale_go_to_definition)
+  autocmd FileType typescript nmap <buffer> gh <Plug>(ale_hover)
 
-  autocmd FileType typescript nmap <buffer> <Leader>ds :TSDefPreview<cr>
+  " autocmd FileType typescript nmap <buffer> <Leader>ds :TSDefPreview<cr>
 
-  autocmd FileType typescript nmap <buffer> <Leader>e :TSRename<cr>
+  " autocmd FileType typescript nmap <buffer> <Leader>e :TSRename<cr>
 
-  autocmd FileType typescript nmap <buffer> <Leader>ec :TSEditConfig<cr>
+  " autocmd FileType typescript nmap <buffer> <Leader>ec :TSEditConfig<cr>
 
 augroup END
 
@@ -230,3 +260,10 @@ function! StripTrailingWhitespace()
   call cursor(l, c)
 endfunction
 " }}}
+
+augroup global_autos
+    autocmd!
+    " Open quickfix/location list window once after :grep, mainly for :Ggrep
+    autocmd QuickFixCmdPost [^l]* cwindow 20
+    autocmd QuickFixCmdPost l*    lwindow 20
+augroup END

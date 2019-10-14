@@ -4,48 +4,53 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 "  Make sure you use single quotes
-
-Plug 'godlygeek/tabular'
-Plug 'jiangmiao/auto-pairs'
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/syntastic'
-Plug 'mtscout6/syntastic-local-eslint.vim'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-abolish'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tacahiroy/ctrlp-funky'
 Plug 'easymotion/vim-easymotion'
-Plug 'kana/vim-textobj-user'
+Plug 'godlygeek/tabular'
+Plug 'jiangmiao/auto-pairs'
 Plug 'kana/vim-textobj-indent'
-" Plug 'rking/ag.vim'
+Plug 'kana/vim-textobj-user'
+Plug 'mtscout6/syntastic-local-eslint.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/syntastic'
+Plug 'tacahiroy/ctrlp-funky'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/ReplaceWithRegister'
+
 Plug 'keith/swift.vim'
 Plug 'flowtype/vim-flow'
-Plug 'prettier/vim-prettier'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'npm install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 
 " autocomplete
 Plug 'Shougo/deoplete.nvim'
 " Plug 'Shougo/neocomplete.vim'
 " Plug 'Valloric/YouCompleteMe'
 
+" terminal
+Plug 'kassio/neoterm'
+
 " JavaScript
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 
 " Golang
-Plug 'fatih/vim-go', { 'tag': 'v1.19', 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', { 'frozen': 1, 'tag': 'v1.21', 'do': ':GoUpdateBinaries' }
 " Plug 'zchee/deoplete-go'
 
 " Markdown
 Plug 'tpope/vim-markdown'
 
 " Elixir
-Plug 'elixir-lang/vim-elixir'
+" Plug 'elixir-lang/vim-elixir'
 
 " Elm
 " Plug 'lambdatoast/elm.vim' " seams not maintain any more
@@ -57,7 +62,9 @@ Plug 'Rip-Rip/clang_complete'
 
 " Typescript
 Plug 'HerringtonDarkholme/yats.vim' " syntax highlight
-Plug 'mhartington/nvim-typescript', { 'do': './install.sh' } " IDE?
+" Plug 'mhartington/nvim-typescript', { 'do': './install.sh' } " IDE?
+Plug 'dense-analysis/ale'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Pgsql
 Plug 'lifepillar/pgsql.vim'
