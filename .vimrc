@@ -111,6 +111,7 @@ let g:syntastic_go_checkers = ['golint']
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option('sources', {
 \ 'typescript': ['ale'],
+\ 'rust': ['ale'],
 \})
 
 " vim-go
@@ -128,7 +129,16 @@ let g:ale_completion_tsserver_autoimport = 1
 let g:ale_linters = {
 \   'typescript': ['tsserver', 'eslint'],
 \   'go': [],
+\   'rust': ['analyzer'],
 \}
+let g:ale_fixers = {
+\   'rust': ['rustfmt'],
+\}
+let g:ale_rust_analyzer_config = {
+\   'cargo': { 'allFeatures': 1 }
+\}
+
+let g:rustfmt_autosave = 1
 
 " haskellmode
 let g:haddock_browser="/usr/bin/google-chrome-stable"
@@ -179,8 +189,8 @@ let g:prettier#config#trailing_comma = 'es5'
 augroup filetype_cpp
   autocmd!
   " vim-clang-format
-  autocmd FileType c ClangFormatAutoEnable
-  autocmd FileType cpp ClangFormatAutoEnable
+  autocmd FileType c ClangFormatAutoDisable
+  autocmd FileType cpp ClangFormatAutoDisable
 augroup END
 
 augroup filetype_vim
@@ -213,6 +223,12 @@ augroup filetype_go
   " autocmd FileType go nmap <buffer> <Leader>e <Plug>(go-rename)
 
   " autocmd FileType go autocmd BufWritePost * :GoErrCheck
+augroup END
+
+augroup filetype_rust
+  autocmd!
+  autocmd FileType rust nmap <buffer> <C-]> <Plug>(ale_go_to_definition)
+  autocmd FileType rust nmap <buffer> gh <Plug>(ale_hover)
 augroup END
 
 autocmd BufNewFile,BufRead *.tsx setlocal filetype=typescript
