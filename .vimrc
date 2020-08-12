@@ -138,7 +138,8 @@ let g:ale_rust_analyzer_config = {
 \   'cargo': { 'allFeatures': 1 }
 \}
 
-let g:rustfmt_autosave = 1
+let g:ale_fix_on_save = 1
+let g:ale_rust_rustfmt_options = '--edition 2018'
 
 " haskellmode
 let g:haddock_browser="/usr/bin/google-chrome-stable"
