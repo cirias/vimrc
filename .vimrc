@@ -124,7 +124,7 @@ let g:go_def_mode = "gopls"
 
 " ale
 " let g:ale_completion_enabled = 1
-let g:ale_completion_tsserver_autoimport = 1
+let g:ale_completion_autoimport = 1
 " ale does not support typescript-eslint so far
 let g:ale_linters = {
 \   'typescript': ['tsserver', 'eslint'],
@@ -135,7 +135,9 @@ let g:ale_fixers = {
 \   'rust': ['rustfmt'],
 \}
 let g:ale_rust_analyzer_config = {
-\   'cargo': { 'allFeatures': 1 }
+\   'diagnostics': { 'disabled': ['unresolved-import'] },
+\   'cargo': { 'allFeatures': 1, 'loadOutDirsFromCheck': v:true },
+\   'procMacro': { 'enable': v:true }
 \}
 
 let g:ale_fix_on_save = 1
