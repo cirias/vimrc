@@ -44,7 +44,7 @@ return require('packer').startup(function()
     vim.api.nvim_set_keymap('n', '<Leader>fg', '<CMD>lua require(\'telescope.builtin\').live_grep()<CR>', { noremap = true })
   end}
 
-  use { 'nvim-treesitter/nvim-treesitter', disable = true, run = ':TSUpdate', config = function()
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = function()
     require('treesitter')
   end}
 
@@ -61,7 +61,7 @@ return require('packer').startup(function()
   use 'tpope/vim-repeat'
   use 'tpope/vim-surround'
   use 'tpope/vim-unimpaired'
-  use 'vim-scripts/ReplaceWithRegister'
+  -- use 'vim-scripts/ReplaceWithRegister'
 
   use {
     'prettier/vim-prettier',
@@ -82,4 +82,6 @@ augroup END
       ]])
     end
   }
+
+  -- use 'github/copilot.vim'
 end)
