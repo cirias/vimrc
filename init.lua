@@ -27,6 +27,7 @@ vim.o.backupcopy = 'yes'
 vim.cmd([[syntax on]])
 
 -- colorful
+-- require('solarized').set()
 vim.cmd([[colorscheme solarized]])
 vim.g.solarized_termcolors = 256
 vim.o.background = 'light'

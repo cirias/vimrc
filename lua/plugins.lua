@@ -52,7 +52,8 @@ return require('packer').startup(function()
     vim.g.NERDSpaceDelims = 1
   end}
 
-  use 'altercation/vim-colors-solarized'
+  use 'shaunsingh/solarized.nvim'
+  -- use 'altercation/vim-colors-solarized'
   use 'jiangmiao/auto-pairs'
   -- use 'kana/vim-textobj-indent'
   -- use 'kana/vim-textobj-user'

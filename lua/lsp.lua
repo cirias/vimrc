@@ -77,11 +77,25 @@ lspconfig.tailwindcss.setup{
 
 lspconfig.rust_analyzer.setup {
   on_attach = shared_on_attach,
+  cmd = { "rust-analyzer" },
   settings = {
     ["rust-analyzer"] = {
-      check = {
-        command = "clippy",
-      },
+      --[[
+         [ check = {
+         [   command = "clippy",
+         [ },
+         ]]
+      cargo = {
+        buildScripts = {
+          overrideCommand = {
+            "cargo",
+            "check",
+            "--quiet",
+            "--message-format=json",
+            "--keep-going",
+          }
+        }
+      }
     }
   }
 }
